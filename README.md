@@ -21,15 +21,17 @@ Implantar un sistema web que le permita a la concesionaria controlar de manera e
 ## propuesta del diseño de colecciones para base de datos NoSQL:
 
 <p align="center">
-  <img src="https://github.com/StivenAtis/YourIdealCar.web-Backend/blob/main/Media/Colecciones.png" />
+  <img src="https://github.com/StivenAtis/YourIdealCar.web-Backend/blob/main/Media/ColeccionDB.png" />
 </p>
 
 ---
 
 ## <p align=center>Prototipo de interfaz:
 
+[Prueba de bocetos ](https://stivenatis.github.io/YourIdealCar.web-Frontend/#home_page)
+
 <p align="center">
-  <img src="https://github.com/StivenAtis/YourIdealCar.web-Backend/blob/main/Media/Home_page.png" />
+  <img src="https://github.com/StivenAtis/YourIdealCar.web-Backend/blob/main/Media/home.png" />
 </p>
 
 ---
@@ -56,7 +58,7 @@ MisiónTic2022 - Ciclo - 4**
 ---
 
 <p align="center">
-  <img src="https://github.com/StivenAtis/YourIdealCar.web-Frontend/blob/main/Media/Logo.png" />
+  <img src="https://github.com/StivenAtis/YourIdealCar.web-Backend/blob/main/Media/Logo.png" />
 </p>
 
 ---
