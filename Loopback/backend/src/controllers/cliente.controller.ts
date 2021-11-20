@@ -56,9 +56,15 @@ export class ClienteController {
     cliente.contrasenia = passwordCifrado;
     let customer = this.clienteRepository.create(cliente);
     //Envio de notificación al correro electronico:
-    fetch("http://127.0.0.1:5000/email?email=brayannStivenn02@gmail.com&subject=Correo de prueba&message=Hello!").then((data:any)=>{
+    let correo=cliente.email;
+    let asunto=`Welcome ${cliente.nombres}`;
+    let mensaje=`Bienvenid@ ${`${cliente.nombres} ${cliente.apellidos}, te damos la bienvenida a YourIdealCar.web`}`;
+    fetch(`http://127.0.0.1:5000/email?email=${correo}&subject=${asunto}&message=${mensaje}`).then((data:any)=>{
       console.log(data);
     });
+    //fetch("http://127.0.0.1:5000/email?email=brayannStivenn02@gmail.com&subject=Correo de prueba&message=Hello!").then((data:any)=>{
+      //console.log(data);
+    //});
      return customer;
   }
 

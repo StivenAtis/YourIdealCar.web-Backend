@@ -56,9 +56,15 @@ export class AsesorController {
     asesor.contrasenia = passwordCifrado;
     let advisor = await this.asesorRepository.create(asesor);
     //Envio de notificación al correro electronico:
-    fetch("http://127.0.0.1:5000/email?email=brayannStivenn02@gmail.com&subject=Correo de prueba&message=Hello!").then((data:any)=>{
+    let correo=asesor.email;
+    let asunto=`Welcome ${asesor.nombres}`;
+    let mensaje=`Bienvenid@ ${`${asesor.nombres} ${asesor.apellidos}, te damos la bienvenida a YourIdealCar.web`}`;
+    fetch(`http://127.0.0.1:5000/email?email=${correo}&subject=${asunto}&message=${mensaje}`).then((data:any)=>{
       console.log(data);
     });
+    //fetch("http://127.0.0.1:5000/email?email=brayannStivenn02@gmail.com&subject=Correo de prueba&message=Hello!").then((data:any)=>{
+      //console.log(data);
+    //});
     return advisor;
   }
 

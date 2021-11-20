@@ -56,7 +56,13 @@ export class AdministradorController {
     administrador.contrasenia = passwordCifrado;
     let manager = this.administradorRepository.create(administrador);
     //Envio de notificación al correro electronico:
-    fetch("http://127.0.0.1:5000/email?email=brayannStivenn02@gmail.com&subject=Correo de prueba&message=Hello!").then((data:any)=>{
+    let correo=administrador.email;
+    let asunto=`Welcome ${administrador.nombres}`;
+    let mensaje=`Bienvenid@ ${`${administrador.nombres} ${administrador.apellidos}, te damos la bienvenida a YourIdealCar.web`}`;
+    //fetch("http://127.0.0.1:5000/email?email=" +email+"&subject="+subject+"&message="+message).then((data:any)=>{
+      //console.log(data);
+    //});
+    fetch(`http://127.0.0.1:5000/email?email=${correo}&subject=${asunto}&message=${mensaje}`).then((data:any)=>{
       console.log(data);
     });
     return manager;
