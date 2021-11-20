@@ -1,10 +1,11 @@
+import { service } from '@loopback/core';
 import {
-  Count,
-  CountSchema,
-  Filter,
-  FilterExcludingWhere,
-  repository,
-  Where,
+  Count, 
+  CountSchema, 
+  Filter, 
+  FilterExcludingWhere, 
+  repository, 
+  Where, 
 } from '@loopback/repository';
 import {
   post,
@@ -17,19 +18,23 @@ import {
   requestBody,
   response,
 } from '@loopback/rest';
-import {Asesor} from '../models';
-import {AsesorRepository} from '../repositories';
+import { Asesor } from '../models';
+import { AsesorRepository } from '../repositories';
+import { AutenticacionService } from '../services';
+const fetch = require('node-fetch');
 
 export class AsesorController {
   constructor(
     @repository(AsesorRepository)
-    public asesorRepository : AsesorRepository,
-  ) {}
+    public asesorRepository: AsesorRepository,
+    @service(AutenticacionService)
+    public servicioAutenticacion: AutenticacionService
+  ) { }
 
   @post('/asesors')
   @response(200, {
     description: 'Asesor model instance',
-    content: {'application/json': {schema: getModelSchemaRef(Asesor)}},
+    content: { 'application/json': { schema: getModelSchemaRef(Asesor) } },
   })
   async create(
     @requestBody({
@@ -44,13 +49,23 @@ export class AsesorController {
     })
     asesor: Omit<Asesor, 'id'>,
   ): Promise<Asesor> {
-    return this.asesorRepository.create(asesor);
+    //Creación de contraseña aleatoria:
+    let password = this.servicioAutenticacion.GenerarPassword();
+    //Cifrado de la contraseña:
+    let passwordCifrado = this.servicioAutenticacion.CifrarPassword(password);
+    asesor.contrasenia = passwordCifrado;
+    let advisor = await this.asesorRepository.create(asesor);
+    //Envio de notificación al correro electronico:
+    fetch("http://127.0.0.1:5000/email?email=brayannStivenn02@gmail.com&subject=Correo de prueba&message=Hello!").then((data:any)=>{
+      console.log(data);
+    });
+    return advisor;
   }
 
   @get('/asesors/count')
   @response(200, {
     description: 'Asesor model count',
-    content: {'application/json': {schema: CountSchema}},
+    content: { 'application/json': { schema: CountSchema } },
   })
   async count(
     @param.where(Asesor) where?: Where<Asesor>,
@@ -65,7 +80,7 @@ export class AsesorController {
       'application/json': {
         schema: {
           type: 'array',
-          items: getModelSchemaRef(Asesor, {includeRelations: true}),
+          items: getModelSchemaRef(Asesor, { includeRelations: true }),
         },
       },
     },
@@ -79,13 +94,13 @@ export class AsesorController {
   @patch('/asesors')
   @response(200, {
     description: 'Asesor PATCH success count',
-    content: {'application/json': {schema: CountSchema}},
+    content: { 'application/json': { schema: CountSchema } },
   })
   async updateAll(
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(Asesor, {partial: true}),
+          schema: getModelSchemaRef(Asesor, { partial: true }),
         },
       },
     })
@@ -100,13 +115,13 @@ export class AsesorController {
     description: 'Asesor model instance',
     content: {
       'application/json': {
-        schema: getModelSchemaRef(Asesor, {includeRelations: true}),
+        schema: getModelSchemaRef(Asesor, { includeRelations: true }),
       },
     },
   })
   async findById(
     @param.path.string('id') id: string,
-    @param.filter(Asesor, {exclude: 'where'}) filter?: FilterExcludingWhere<Asesor>
+    @param.filter(Asesor, { exclude: 'where' }) filter?: FilterExcludingWhere<Asesor>
   ): Promise<Asesor> {
     return this.asesorRepository.findById(id, filter);
   }
@@ -120,7 +135,7 @@ export class AsesorController {
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(Asesor, {partial: true}),
+          schema: getModelSchemaRef(Asesor, { partial: true }),
         },
       },
     })
