@@ -68,8 +68,11 @@ def envioEmail():
         sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
         response = sg.send(message)
         print(response.status_code)
-        print(response.body)
-        print(response.headers)
+        #print(response.body)
+        #print(response.headers)
+        print("Destino: " + destination)
+        print("Asunto: " + issue)
+        print("Mensaje: " + content)
         return "Correo enviado con éxito a: " + destination
     except Exception as e:
         print(e.message)
