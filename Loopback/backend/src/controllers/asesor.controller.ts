@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import { service } from '@loopback/core';
 import {
   Count, 
@@ -68,6 +69,7 @@ export class AsesorController {
 
   //--------------------------------------------------------------------------------------------------------------------
 
+  @authenticate("asesor")
   @post('/asesors')
   @response(200, {
     description: 'Asesor model instance',
