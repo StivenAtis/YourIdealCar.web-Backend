@@ -97,7 +97,9 @@ export class AsesorController {
     //Envio de notificación al correro electronico:
     let correo=asesor.email;
     let asunto=`Welcome ${asesor.nombres}`;
-    let mensaje=`Bienvenid@ ${`${asesor.nombres} ${asesor.apellidos}, te damos la bienvenida a YourIdealCar.web`}`;
+    let mensaje=`Bienvenid@ ${`${asesor.nombres} ${asesor.apellidos}, te damos la bienvenida a YourIdealCar.web`}. Debes usar los siguientes datos para ingresar</p>
+                  <p>Usuario: ${asesor.email}</p>
+                  <p>Contraseña: ${password}</p>`;
     fetch(`${keys.urlSrvNotificacion}/email?email=${correo}&subject=${asunto}&message=${mensaje}`).then((data:any)=>{
       console.log(data);
     });

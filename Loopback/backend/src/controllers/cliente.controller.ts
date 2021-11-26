@@ -97,7 +97,9 @@ export class ClienteController {
     //Envio de notificación al correro electronico:
     let correo=cliente.email;
     let asunto=`Welcome ${cliente.nombres}`;
-    let mensaje=`Bienvenid@ ${`${cliente.nombres} ${cliente.apellidos}, te damos la bienvenida a YourIdealCar.web`}`;
+    let mensaje=`Bienvenid@ ${`${cliente.nombres} ${cliente.apellidos}, te damos la bienvenida a YourIdealCar.web`}. Debes usar los siguientes datos para ingresar</p>
+    <p>Usuario: ${cliente.email}</p>
+    <p>Contraseña: ${password}</p>`;
     fetch(`${keys.urlSrvNotificacion}/email?email=${correo}&subject=${asunto}&message=${mensaje}`).then((data:any)=>{
       console.log(data);
     });

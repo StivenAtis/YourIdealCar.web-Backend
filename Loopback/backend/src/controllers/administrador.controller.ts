@@ -97,7 +97,9 @@ export class AdministradorController {
     //Envio de notificación al correro electronico:
     let correo=administrador.email;
     let asunto=`Welcome ${administrador.nombres}`;
-    let mensaje=`Bienvenid@ ${`${administrador.nombres} ${administrador.apellidos}, te damos la bienvenida a YourIdealCar.web`}`;
+    let mensaje=`<p> Bienvenid@ ${`${administrador.nombres} ${administrador.apellidos}, te damos la bienvenida a YourIdealCar.web`}. Debes usar los siguientes datos para ingresar</p>
+                  <p>Usuario: ${administrador.email}</p>
+                  <p>Contraseña: ${password}</p>`;
     //fetch("http://127.0.0.1:5000/email?email=" +email+"&subject="+subject+"&message="+message).then((data:any)=>{
       //console.log(data);
     //});
