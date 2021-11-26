@@ -7,3 +7,4 @@ export * from './vehiculo.model';
 export * from './tipo-vehiculo.model';
 export * from './ciudad.model';
 export * from './departamento.model';
+export * from './credenciales.model';

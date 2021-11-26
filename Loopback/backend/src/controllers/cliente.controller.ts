@@ -17,11 +17,16 @@ import {
   del,
   requestBody,
   response,
+  HttpErrors,
 } from '@loopback/rest';
 import {Cliente} from '../models';
+import { Credenciales } from '../models';
+import { keys } from '../config/keys';
 import {ClienteRepository} from '../repositories';
 import { AutenticacionService } from '../services';
 const fetch = require('node-fetch');
+
+//--------------------------------------------------------------------------------------------------------------------
 
 export class ClienteController {
   constructor(
@@ -30,6 +35,38 @@ export class ClienteController {
     @service(AutenticacionService)
     public servicioAutenticacion: AutenticacionService
   ) {}
+
+  //--------------------------------------------------------------------------------------------------------------------
+
+  @post("/autenticarCliente",{
+    responses:{
+      "200":{
+        description: "Autenticar Cliente"
+      }
+    }
+  })
+  async autenticarCliente(
+    @requestBody()credenciales:Credenciales
+  ){
+    let cliente = await this.servicioAutenticacion.IdentificarCliente(credenciales.usuario,credenciales.contrasenia)
+    if (cliente) {
+      let token = this.servicioAutenticacion.GenerarJWTCliente(cliente);
+      return {
+        datos:{
+          nombre: cliente.nombres + " " + cliente.apellidos,
+          correo: cliente.email,
+          id: cliente.id_cliente,
+          rol: "Cliente"
+        },
+        tk: token
+      }
+    }
+    else {
+      throw new HttpErrors[401]("Los datos ingresados no son validos");
+    }
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
 
   @post('/clientes')
   @response(200, {
@@ -59,7 +96,7 @@ export class ClienteController {
     let correo=cliente.email;
     let asunto=`Welcome ${cliente.nombres}`;
     let mensaje=`Bienvenid@ ${`${cliente.nombres} ${cliente.apellidos}, te damos la bienvenida a YourIdealCar.web`}`;
-    fetch(`http://127.0.0.1:5000/email?email=${correo}&subject=${asunto}&message=${mensaje}`).then((data:any)=>{
+    fetch(`${keys.urlSrvNotificacion}/email?email=${correo}&subject=${asunto}&message=${mensaje}`).then((data:any)=>{
       console.log(data);
     });
     //fetch("http://127.0.0.1:5000/email?email=brayannStivenn02@gmail.com&subject=Correo de prueba&message=Hello!").then((data:any)=>{
@@ -67,6 +104,8 @@ export class ClienteController {
     //});
      return customer;
   }
+
+  //--------------------------------------------------------------------------------------------------------------------
 
   @get('/clientes/count')
   @response(200, {

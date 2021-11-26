@@ -17,11 +17,16 @@ import {
   del,
   requestBody,
   response,
+  HttpErrors,
 } from '@loopback/rest';
 import {Administrador} from '../models';
+import { Credenciales } from '../models';
+import { keys } from '../config/keys';
 import {AdministradorRepository} from '../repositories';
 import { AutenticacionService } from '../services';
 const fetch = require('node-fetch');
+
+//--------------------------------------------------------------------------------------------------------------------
 
 export class AdministradorController {
   constructor(
@@ -30,6 +35,38 @@ export class AdministradorController {
     @service(AutenticacionService)
     public servicioAutenticacion: AutenticacionService
   ) {}
+
+  //--------------------------------------------------------------------------------------------------------------------
+
+  @post("/autenticarAdministrador",{
+    responses:{
+      "200":{
+        description: "Autenticar Administrador"
+      }
+    }
+  })
+  async autenticarAdministrador(
+    @requestBody()credenciales:Credenciales
+  ){
+    let administrador = await this.servicioAutenticacion.IdentificarAdministrador(credenciales.usuario,credenciales.contrasenia)
+    if (administrador) {
+      let token = this.servicioAutenticacion.GenerarJWTAdmin(administrador);
+      return {
+        datos:{
+          nombre: administrador.nombres + " " + administrador.apellidos,
+          correo: administrador.email,
+          id: administrador.id_administrador,
+          rol: "Administrador"
+        },
+        tk: token
+      }
+    }
+    else {
+      throw new HttpErrors[401]("Los datos ingresados no son validos");
+    }
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
 
   @post('/administradors')
   @response(200, {
@@ -62,11 +99,13 @@ export class AdministradorController {
     //fetch("http://127.0.0.1:5000/email?email=" +email+"&subject="+subject+"&message="+message).then((data:any)=>{
       //console.log(data);
     //});
-    fetch(`http://127.0.0.1:5000/email?email=${correo}&subject=${asunto}&message=${mensaje}`).then((data:any)=>{
+    fetch(`${keys.urlSrvNotificacion}/email?email=${correo}&subject=${asunto}&message=${mensaje}`).then((data:any)=>{
       console.log(data);
     });
     return manager;
   }
+
+  //--------------------------------------------------------------------------------------------------------------------
 
   @get('/administradors/count')
   @response(200, {
