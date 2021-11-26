@@ -70,8 +70,8 @@ export class AutenticacionService {
     }
   }
 
-   //Función para identificar un cliente:
-   IdentificarCliente(usuario: string, clave: string) {
+  //Función para identificar un cliente:
+  IdentificarCliente(usuario: string, clave: string) {
     try {
       let cliente = this.clienteRepository.findOne({ where: { email: usuario, contrasenia: clave } });
       if (cliente) {
@@ -94,7 +94,8 @@ export class AutenticacionService {
       data: {
         id: asesor.id_asesor,
         correo: asesor.email,
-        nombre: asesor.nombres + " " + asesor.apellidos
+        nombre: asesor.nombres + " " + asesor.apellidos,
+        rol: "Asesor"
       }
     }, keys.claveJWT
     );
@@ -107,7 +108,8 @@ export class AutenticacionService {
       data: {
         id: administrador.id_administrador,
         correo: administrador.email,
-        nombre: administrador.nombres + " " + administrador.apellidos
+        nombre: administrador.nombres + " " + administrador.apellidos,
+        rol: "Administrador"
       }
     }, keys.claveJWT
     );
@@ -120,7 +122,8 @@ export class AutenticacionService {
       data: {
         id: cliente.id_cliente,
         correo: cliente.email,
-        nombre: cliente.nombres + " " + cliente.apellidos
+        nombre: cliente.nombres + " " + cliente.apellidos,
+        rol: "Cliente"
       }
     }, keys.claveJWT
     );
