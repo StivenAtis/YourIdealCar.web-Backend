@@ -28,10 +28,10 @@ Implantar un sistema web que le permita a la concesionaria controlar de manera e
 
 ## <p align=center>Prototipo de interfaz:
 
-[Prueba de bocetos ](https://stivenatis.github.io/YourIdealCar.web-Frontend/#home_page)
+[Prueba de bocetos ](https://n9.cl/youridealcar)
 
 <p align="center">
-  <img src="https://github.com/StivenAtis/YourIdealCar.web-Backend/blob/main/Media/home.png" />
+  <img src="https://github.com/StivenAtis/YourIdealCar.web/blob/gh-pages/Media/mockups.png" />
 </p>
 
 ---
