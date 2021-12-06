@@ -41,6 +41,7 @@ Implantar un sistema web que le permita a la concesionaria controlar de manera e
 [ Sprint 1 ](https://trello.com/b/utKnA91D/youridealcarweb-sprint-1) </p>
 [ Sprint 2 ](https://trello.com/b/7U4mefZf/youridealcarweb-sprint-2) </p>
 [ Sprint 3 ](https://trello.com/b/AtRei9oi/youridealcarweb-sprint-3) </p>
+[ Sprint 4 ](https://trello.com/b/JbFLnIRG/youridealcarweb-sprint-4) </p>
 
 </p>
 
@@ -49,10 +50,6 @@ Implantar un sistema web que le permita a la concesionaria controlar de manera e
 ## <p align=center>responsables equipo de desarrollo:
 
 <p align=center> Atis Revelo Brayan Estiven </p>
-<p align=center> Echeverry Agudelo Omar </p>
-<p align=center> García Santacruz Nicolas Stiven </p>
-<p align=center> Páez Daniel Jeimy Johanna </p>
-<p align=center> Toloza Rojas Karol Stefania </p>
 
 </p>
 
