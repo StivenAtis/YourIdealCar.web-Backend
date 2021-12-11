@@ -59,6 +59,12 @@ export class Cliente extends Entity {
   })
   email: string;
 
+  /*@property({
+    type: 'string',
+    required: true,
+  })
+  imagen: string;*/
+
   @property({
     type: 'string',
     required: true,

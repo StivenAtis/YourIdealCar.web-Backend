@@ -69,7 +69,7 @@ export class ClienteController {
 
   //--------------------------------------------------------------------------------------------------------------------
 
-  @authenticate("cliente")
+  //@authenticate("cliente")
   @post('/clientes')
   @response(200, {
     description: 'Cliente model instance',

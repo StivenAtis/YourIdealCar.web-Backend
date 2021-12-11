@@ -13,11 +13,11 @@ export class Vehiculo extends Entity {
   })
   id?: string;
 
-  @property({
+  /*@property({
     type: 'string',
     required: true,
   })
-  id_vehiculo: string;
+  id_vehiculo: string;*/
 
   @property({
     type: 'string',
@@ -44,16 +44,22 @@ export class Vehiculo extends Entity {
   valor: number;
 
   @property({
-    type: 'date',
+    type: 'string',
     required: true,
   })
   fecha: string;
 
   @property({
-    type: 'boolean',
+    type: 'string',
     required: true,
   })
-  estado: boolean;
+  estado: string;
+
+  @property({
+    type: 'string',
+    required: true,
+  })
+  imagen: string;
 
   @belongsTo(() => Solicitud)
   solicitudId: string;

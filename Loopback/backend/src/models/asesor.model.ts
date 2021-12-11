@@ -64,6 +64,12 @@ export class Asesor extends Entity {
     type: 'string',
     required: true,
   })
+  imagen: string;
+
+  @property({
+    type: 'string',
+    required: true,
+  })
   contrasenia: string;
 
   @property({
